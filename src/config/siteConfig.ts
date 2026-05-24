@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "M_Hyl",
 
 	// 站点 URL
-	site_url: "https://853697.xyz",
+	site_url: "https://blog.853697.xyz",
 
 	// 站点描述
 	description:
@@ -75,7 +75,7 @@ export const siteConfig: SiteConfig = {
 		// 4. 网络图片: { type: "url", value: "https://example.com/logo.png", alt: "Logo" }
 		logo: {
 			type: "image",
-			value: "assets/images/logo.svg",
+			value: "assets/images/logo.png",
 			alt: "我的博客logo",
 		},
 		// 导航栏标题
@@ -91,7 +91,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 站点开始日期，用于统计运行天数
-	siteStartDate: "2025-05-23",
+	siteStartDate: "2026-05-24",
 
 	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
 	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
@@ -129,9 +129,9 @@ export const siteConfig: SiteConfig = {
 	// bangumi的数据为编译时获取的，所以不是实时数据，请配置bangumi.userId
 	pages: {
 		// 友链页面开关
-		friends: true,
+		friends: false,
 		// 赞助页面开关
-		sponsor: true,
+		sponsor: false,
 		// 留言板页面开关，需要配置评论系统
 		guestbook: true,
 		// 番组计划页面开关，含追番、游戏、书籍和音乐，dev调试时只获取一页数据，build才会获取全部数据
@@ -182,14 +182,12 @@ export const siteConfig: SiteConfig = {
 			websiteId: "",
 			// Umami JS地址，支持使用自建
 			scriptUrl: "https://cloud.umami.is/script.js",
-			// Umami 会话回放脚本地址，支持使用自建
-			replaysScriptUrl: "https://cloud.umami.is/recorder.js",
 			// 是否追踪出站链接
 			trackOutboundLinks: true,
 			// 是否收集浏览器性能指标
 			collectWebVitals: false,
 			// 会话回放配置
-			replays: {
+			relpays: {
 				// 是否启用会话回放
 				enabled: false,
 				// 录制会话采样率，范围 0-1，例如 0.15 表示记录 15% 的会话
