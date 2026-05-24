@@ -75,8 +75,8 @@ export const siteConfig: SiteConfig = {
 		// 4. 网络图片: { type: "url", value: "https://example.com/logo.png", alt: "Logo" }
 		logo: {
 			type: "image",
-			value: "assets/images/firefly.png",
-			alt: "🍀",
+			value: "assets/images/logo.svg",
+			alt: "我的博客logo",
 		},
 		// 导航栏标题
 		title: "牧河伊琉",
