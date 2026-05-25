@@ -24,7 +24,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "qq",
 			icon: "fa7-brands:qq",
-			url: "tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=3384357097",
+			url: "/assets/images/qq.png",
 			showName: false,
 		},
 		{
@@ -42,7 +42,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "wechat",
 			icon: "simple-icons:wechat",
-			url: "/assets/images/avatar.webp",
+			url: "/assets/images/weichat.png",
 			showName: false,
 		},
 	],
