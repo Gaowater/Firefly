@@ -42,7 +42,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "wechat",
 			icon: "simple-icons:wechat",
-			url: "/tianjiahaoyou.png",
+			url: "/assets/images/avatar.webp",
 			showName: false,
 		},
 	],
