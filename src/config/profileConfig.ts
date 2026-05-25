@@ -40,9 +40,9 @@ export const profileConfig: ProfileConfig = {
 			showName: false,
 		},
 		{
-			name: "RSS",
-			icon: "fa7-solid:rss",
-			url: "/rss/",
+			name: "wechat",
+			icon: "simple-icons:wechat",
+			url: "/tianjiahaoyou.png/",
 			showName: false,
 		},
 	],
