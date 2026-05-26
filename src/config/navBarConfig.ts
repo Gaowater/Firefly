@@ -74,7 +74,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 				name: "Our first webpage",
 				url: "https://853697.xyz",
 				external: true,
-				icon: "fa7-brands:github",
+				icon: "fa7-regular:chess-rook",
 			},
 		],
 	});
