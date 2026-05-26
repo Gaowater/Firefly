@@ -34,12 +34,6 @@ export const profileConfig: ProfileConfig = {
 			showName: false,
 		},
 		{
-			name: "Email",
-			icon: "fa7-solid:envelope",
-			url: "3384357097@qq.com",
-			showName: false,
-		},
-		{
 			name: "wechat",
 			icon: "simple-icons:wechat",
 			url: "/assets/images/weichat.png",
