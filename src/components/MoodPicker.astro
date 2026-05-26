@@ -1,12 +1,12 @@
 ---
-// src/components/MoodPicker.astro
-// 12 个心情图标，icon 和 label 你自己填
+import { Icon } from "astro-icon/components";
+
 const moods = [
   { icon: "fa7-regular:face-grin-beam", label: "愉悦" },
   { icon: "fa7-regular:face-smile-beam", label: "悠闲" },
   { icon: "fa7-regular:face-laugh-squint", label: "期待" },
   { icon: "fa7-regular:face-laugh-beam", label: "自由" },
-  { icon: "fa7-regular:frown", label: "悲伤" },
+  { icon: "fa7-regular:face-frown", label: "悲伤" },
   { icon: "fa7-regular:face-meh-blank", label: "孤独" },
   { icon: "fa7-regular:face-grimace", label: "愤怒" },
   { icon: "fa7-regular:face-frown-open", label: "遗憾" },
@@ -16,28 +16,44 @@ const moods = [
   { icon: "fa7-regular:face-smile-beam", label: "思念" },
 ];
 
-const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
+const defaultIcon = "fa7-brands:gratipay";
 ---
 
 <div class="mood-picker-wrapper" id="moodPicker">
-  <button class="mood-btn" id="moodBtn" title="选择心情">
-    <span class="mood-icon" id="moodIcon">
-      <span class="iconify" data-icon={defaultIcon}></span>
+  <button class="mood-btn" id="moodBtn" title="选择心情" type="button"
+    onclick="
+      var d=document.getElementById('moodDropdown');
+      d.style.display = d.style.display==='none' ? 'block' : 'none';
+      event.stopPropagation();
+    "
+  >
+    <span class="mood-current-icon" id="moodCurrentIcon" data-icon={defaultIcon}>
+      <Icon name={defaultIcon} />
     </span>
   </button>
 
-  <div class="mood-dropdown" id="moodDropdown">
+  <div class="mood-dropdown" id="moodDropdown" style="display:none;">
     <div class="mood-grid">
       {moods.map((mood) => (
-        <button class="mood-option" data-icon={mood.icon}>
-          <span class="iconify" data-icon={mood.icon}></span>
+        <button class="mood-option" type="button"
+          onclick={`var icon=document.getElementById('moodCurrentIcon');icon.setAttribute('data-icon','${mood.icon}');if(window.Iconify)window.Iconify.scan(icon);document.getElementById('moodDropdown').style.display='none';localStorage.setItem('mood-icon','${mood.icon}');`}
+        >
+          <Icon name={mood.icon} />
           <span class="mood-label">{mood.label}</span>
         </button>
       ))}
     </div>
-    <button class="mood-reset" id="moodReset">
-      <span class="iconify" data-icon="material-symbols:refresh"></span>
-      重置
+    <button class="mood-reset" id="moodReset" type="button"
+      onclick="
+        var icon=document.getElementById('moodCurrentIcon');
+        icon.setAttribute('data-icon','fa7-brands:gratipay');
+        if(window.Iconify)window.Iconify.scan(icon);
+        document.getElementById('moodDropdown').style.display='none';
+        localStorage.removeItem('mood-icon');
+      "
+    >
+      <Icon name="material-symbols:refresh" />
+      <span>重置</span>
     </button>
   </div>
 </div>
@@ -48,7 +64,6 @@ const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
     display: flex;
     align-items: center;
   }
-
   .mood-btn {
     display: flex;
     align-items: center;
@@ -61,21 +76,17 @@ const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
     border-radius: 8px;
     transition: background 0.2s;
     color: var(--text-color, inherit);
+    font-size: 20px;
   }
-
   .mood-btn:hover {
     background: var(--btn-regular-bg, rgba(128, 128, 128, 0.15));
   }
-
-  .mood-icon {
-    font-size: 20px;
+  .mood-current-icon {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
   .mood-dropdown {
-    display: none;
     position: absolute;
     top: 100%;
     right: 0;
@@ -88,44 +99,36 @@ const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
     z-index: 1000;
     min-width: 240px;
   }
-
-  .mood-dropdown.show {
-    display: block;
-  }
-
   .mood-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 6px;
     margin-bottom: 8px;
   }
-
   .mood-option {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    padding: 6px 4px 4px;
+    gap: 4px;
+    padding: 8px 4px 4px;
     border: none;
     background: transparent;
     cursor: pointer;
     border-radius: 8px;
     transition: background 0.2s, transform 0.15s;
-    font-size: 24px;
+    font-size: 22px;
+    color: var(--text-color, inherit);
   }
-
   .mood-option:hover {
     background: var(--btn-regular-bg, rgba(128, 128, 128, 0.1));
     transform: scale(1.1);
   }
-
   .mood-label {
     font-size: 11px;
     color: var(--text-meta, #888);
     white-space: nowrap;
   }
-
   .mood-reset {
     display: flex;
     align-items: center;
@@ -141,7 +144,6 @@ const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
     color: var(--text-meta, #888);
     transition: background 0.2s;
   }
-
   .mood-reset:hover {
     background: var(--btn-hover-bg, rgba(128, 128, 128, 0.15));
     color: var(--text-color, #333);
@@ -149,50 +151,17 @@ const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
 </style>
 
 <script>
-  const wrapper = document.getElementById("moodPicker");
-  const btn = document.getElementById("moodBtn");
-  const dropdown = document.getElementById("moodDropdown");
-  const icon = document.getElementById("moodIcon");
-  const reset = document.getElementById("moodReset");
-  const defaultIcon = "fa7-solid:heart";
-
-  // 切换下拉菜单
-  btn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    dropdown?.classList.toggle("show");
-  });
-
-  // 选择心情
-  wrapper?.addEventListener("click", (e) => {
-    const option = (e.target as HTMLElement).closest(".mood-option") as HTMLElement | null;
-    if (option) {
-      const iconName = option.dataset.icon;
-      if (iconName) {
-        icon!.innerHTML = `<span class="iconify" data-icon="${iconName}"></span>`;
-        if (window.Iconify) window.Iconify.scan(icon);
-        dropdown?.classList.remove("show");
-        localStorage.setItem("mood-icon", iconName);
-      }
-    }
-  });
-
-  // 重置
-  reset?.addEventListener("click", () => {
-    icon!.innerHTML = `<span class="iconify" data-icon="${defaultIcon}"></span>`;
-    if (window.Iconify) window.Iconify.scan(icon);
-    dropdown?.classList.remove("show");
-    localStorage.removeItem("mood-icon");
-  });
-
-  // 点击外部关闭
-  document.addEventListener("click", () => {
-    dropdown?.classList.remove("show");
-  });
-
-  // 页面加载时恢复之前选择的心情
-  const saved = localStorage.getItem("mood-icon");
+  var saved = localStorage.getItem("mood-icon");
   if (saved) {
-    icon!.innerHTML = `<span class="iconify" data-icon="${saved}"></span>`;
+    var icon = document.getElementById("moodCurrentIcon");
+    icon.setAttribute("data-icon", saved);
     if (window.Iconify) window.Iconify.scan(icon);
   }
+  document.addEventListener("click", function(e) {
+    var picker = document.getElementById("moodPicker");
+    var dropdown = document.getElementById("moodDropdown");
+    if (picker && !picker.contains(e.target)) {
+      dropdown.style.display = "none";
+    }
+  });
 </script>
