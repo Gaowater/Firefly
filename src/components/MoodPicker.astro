@@ -1,0 +1,198 @@
+---
+// src/components/MoodPicker.astro
+// 12 个心情图标，icon 和 label 你自己填
+const moods = [
+  { icon: "fa7-regular:face-grin-beam", label: "愉悦" },
+  { icon: "fa7-regular:face-smile-beam", label: "悠闲" },
+  { icon: "fa7-regular:face-laugh-squint", label: "期待" },
+  { icon: "fa7-regular:face-laugh-beam", label: "自由" },
+  { icon: "fa7-regular:frown", label: "悲伤" },
+  { icon: "fa7-regular:face-meh-blank", label: "孤独" },
+  { icon: "fa7-regular:face-grimace", label: "愤怒" },
+  { icon: "fa7-regular:face-frown-open", label: "遗憾" },
+  { icon: "fa7-regular:face-meh", label: "无聊" },
+  { icon: "fa7-regular:face-rolling-eyes", label: "空虚" },
+  { icon: "fa7-regular:face-grin-stars", label: "发癫" },
+  { icon: "fa7-regular:face-smile-beam", label: "思念" },
+];
+
+const defaultIcon = "fa7-brands:gratipay"; // ← 默认图标，你自己填
+---
+
+<div class="mood-picker-wrapper" id="moodPicker">
+  <button class="mood-btn" id="moodBtn" title="选择心情">
+    <span class="mood-icon" id="moodIcon">
+      <span class="iconify" data-icon={defaultIcon}></span>
+    </span>
+  </button>
+
+  <div class="mood-dropdown" id="moodDropdown">
+    <div class="mood-grid">
+      {moods.map((mood) => (
+        <button class="mood-option" data-icon={mood.icon}>
+          <span class="iconify" data-icon={mood.icon}></span>
+          <span class="mood-label">{mood.label}</span>
+        </button>
+      ))}
+    </div>
+    <button class="mood-reset" id="moodReset">
+      <span class="iconify" data-icon="material-symbols:refresh"></span>
+      重置
+    </button>
+  </div>
+</div>
+
+<style>
+  .mood-picker-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .mood-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+    color: var(--text-color, inherit);
+  }
+
+  .mood-btn:hover {
+    background: var(--btn-regular-bg, rgba(128, 128, 128, 0.15));
+  }
+
+  .mood-icon {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mood-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    padding: 12px;
+    z-index: 1000;
+    min-width: 240px;
+  }
+
+  .mood-dropdown.show {
+    display: block;
+  }
+
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .mood-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 4px 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.15s;
+    font-size: 24px;
+  }
+
+  .mood-option:hover {
+    background: var(--btn-regular-bg, rgba(128, 128, 128, 0.1));
+    transform: scale(1.1);
+  }
+
+  .mood-label {
+    font-size: 11px;
+    color: var(--text-meta, #888);
+    white-space: nowrap;
+  }
+
+  .mood-reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 6px 0;
+    border: none;
+    background: var(--btn-regular-bg, rgba(128, 128, 128, 0.08));
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-meta, #888);
+    transition: background 0.2s;
+  }
+
+  .mood-reset:hover {
+    background: var(--btn-hover-bg, rgba(128, 128, 128, 0.15));
+    color: var(--text-color, #333);
+  }
+</style>
+
+<script>
+  const wrapper = document.getElementById("moodPicker");
+  const btn = document.getElementById("moodBtn");
+  const dropdown = document.getElementById("moodDropdown");
+  const icon = document.getElementById("moodIcon");
+  const reset = document.getElementById("moodReset");
+  const defaultIcon = "fa7-solid:heart";
+
+  // 切换下拉菜单
+  btn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdown?.classList.toggle("show");
+  });
+
+  // 选择心情
+  wrapper?.addEventListener("click", (e) => {
+    const option = (e.target as HTMLElement).closest(".mood-option") as HTMLElement | null;
+    if (option) {
+      const iconName = option.dataset.icon;
+      if (iconName) {
+        icon!.innerHTML = `<span class="iconify" data-icon="${iconName}"></span>`;
+        if (window.Iconify) window.Iconify.scan(icon);
+        dropdown?.classList.remove("show");
+        localStorage.setItem("mood-icon", iconName);
+      }
+    }
+  });
+
+  // 重置
+  reset?.addEventListener("click", () => {
+    icon!.innerHTML = `<span class="iconify" data-icon="${defaultIcon}"></span>`;
+    if (window.Iconify) window.Iconify.scan(icon);
+    dropdown?.classList.remove("show");
+    localStorage.removeItem("mood-icon");
+  });
+
+  // 点击外部关闭
+  document.addEventListener("click", () => {
+    dropdown?.classList.remove("show");
+  });
+
+  // 页面加载时恢复之前选择的心情
+  const saved = localStorage.getItem("mood-icon");
+  if (saved) {
+    icon!.innerHTML = `<span class="iconify" data-icon="${saved}"></span>`;
+    if (window.Iconify) window.Iconify.scan(icon);
+  }
+</script>
