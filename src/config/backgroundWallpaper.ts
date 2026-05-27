@@ -70,31 +70,45 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否允许用户通过控制面板切换横幅标题显示
 			switchable: true,
 			// 主页横幅主标题
-			title: "Lovely firefly!",
+			title: "你好啊！何姨~",
 			// 主页横幅主标题字体大小
 			titleSize: "3.8rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
-			],
+				"山有木兮木有枝，心悦君兮君不知。",
+				"既见君子，云胡不喜。",
+				"众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。",
+				"愿我如星君如月，夜夜流光相皎洁。",
+				"两情若是久长时，又岂在朝朝暮暮。",
+				"玲珑骰子安红豆，入骨相思知不知。",
+				"天涯地角有穷时，只有相思无尽处。",
+				"只愿君心似我心，定不负相思意。",
+				"金风玉露一相逢，便胜却人间无数。",
+				"曾经沧海难为水，除却巫山不是云。",
+				"身无彩凤双飞翼，心有灵犀一点通。",
+				"此情无计可消除，才下眉头，却上心头。",
+				"衣带渐宽终不悔，为伊消得人憔悴。",
+				"问世间，情为何物，直教生死相许。",
+				"执子之手，与子偕老。",
+				"相见时难别亦难，东风无力百花残。",
+				"得成比目何辞死，愿作鸳鸯不羡仙。",
+				"似此星辰非昨夜，为谁风露立中宵。",
+				"长相思兮长相忆，短相思兮无穷极。",
+				"山无陵，江水为竭，冬雷震震，夏雨雪，天地合，乃敢与君绝。",
+				],
 			// 主页横幅副标题字体大小
-			subtitleSize: "1.5rem",
+			subtitleSize: "1.0rem",
 			typewriter: {
 				// 是否启用打字机效果
 				// 打字机开启 → 循环显示所有副标题
 				// 打字机关闭 → 每次刷新随机显示一条副标题
 				enable: true,
 				// 打字速度（毫秒）
-				speed: 100,
+				speed: 120,
 				// 删除速度（毫秒）
 				deleteSpeed: 50,
 				// 完全显示后的暂停时间（毫秒）
-				pauseTime: 2000,
+				pauseTime: 2400,
 			},
 		},
 		// 导航栏配置
