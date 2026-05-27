@@ -17,7 +17,7 @@ export const galleryConfig: GalleryConfig = {
 		// 每添加一个数组项就相当于添加了一个相册，记得在 public/gallery/ 目录下创建对应的子目录并放入图片
 		{
 			id: "memories",
-			cover: "gallery/memories/cover.线条小狗.avif",
+			cover: "gallery/memories/cover.线条小狗.jpg",
 			name: "依琳",
 			description: "晨光之吻自遥远的地平线漫来，温柔了整片荒原。",
 			location: "临洮县，甘肃省，中国",
@@ -26,14 +26,14 @@ export const galleryConfig: GalleryConfig = {
 		},
 		{
 			id: "encrypted-test",
-			name: "加密相册示例",
+			cover: "gallery/encrypted-test/cover.相册封面.avif",
+			name: "加密相册",
 			description:
-				"这是一个加密相册的示例，设置了访问密码，只有输入正确的密码才能查看相册内容。",
-			location: "崩坏：星穹铁道",
-			date: "2026-02-01",
-			tags: ["加密相册", "示例"],
+				"这是一个加密相册，设置了访问密码，只有输入正确的密码才能查看相册内容哦~",
+			location: "保密",
+			date: "2026-05-28",
+			tags: ["加密相册"],
 			password: "123456",
-			passwordHint: "示例密码123456",
 		},
 	],
 

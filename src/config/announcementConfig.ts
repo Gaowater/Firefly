@@ -5,10 +5,10 @@ export const announcementConfig: AnnouncementConfig = {
 	title: "公告",
 
 	// 公告内容
-	content: "欢迎来到我的博客！这是一则示例公告。",
+	content: "欢迎你终于来到了我的博客！这里是我的小天地，记录着我的或者你的点点滴滴。希望你能在这里找到一些有趣的东西，或者只是简单地看看我的生活。无论如何，感谢你的到来！",
 
 	// 是否允许用户关闭公告
-	closable: true,
+	closable: false,
 
 	link: {
 		// 启用链接
